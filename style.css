@@ -24,17 +24,16 @@ ul {
   list-style: none;
 }
 /*Typography*/
-h2,
-h3,
-h3 > a {
+
+h1 > a {
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--color-two);
 }
-h3 > a {
+h1 > a {
   text-decoration: none;
 }
-h3 > a:hover {
+h1 > a:hover {
   color: var(--color-one);
 }
 
