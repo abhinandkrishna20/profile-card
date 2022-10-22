@@ -1,3 +1,4 @@
+/*General parameters*/
 html {
   font-size: 62.5%;
 }
@@ -5,6 +6,8 @@ body {
   font-family: 'Kumbh Sans', sans-serif;
   background: var(--color-one);
   margin: 0;
+  min-height: 100vh;
+  height: 100%;
 }
 :root {
   --color-one: hsl(185, 75%, 39%);
@@ -16,6 +19,9 @@ img:not(.profile__pic) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+ul {
+  list-style: none;
 }
 /*Typography*/
 h2,
@@ -32,26 +38,45 @@ h3 > a:hover {
   color: var(--color-one);
 }
 
-.tag {
-  font-size: 1.1rem;
-  color: var(--color-three);
-  letter-spacing: 1.2px;
-}
 /*Containers*/
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(./images/bg-pattern-top.svg),
-    url(./images/bg-pattern-bottom.svg);
 
-  background-repeat: no-repeat;
-  background-size: 90rem;
-  background-position-x: -20vw, 49vw;
-  background-position-y: -75vh, 55vh;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-one);
+  z-index: -1;
 }
 
+/*psuedo elments*/
+.container:before,
+.container:after {
+  position: absolute;
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  background-size: auto;
+  transform: translate(-50%, -50%); /*to the left and top*/
+
+  z-index: -1;
+}
+/*adding the top svg before the container*/
+.container:before {
+  top: 0;
+  left: 0;
+  background: url('/images/bg-pattern-top.svg') no-repeat bottom right; /*to expand to bottom and right*/
+}
+/*adding the top svg after the container*/
+.container:after {
+  top: 100%;
+  left: 100%;
+  background: url('./images/bg-pattern-bottom.svg') no-repeat top left; /*to expand to top and left*/
+}
+/*card*/
 .card {
   display: grid;
   grid-template-rows: 40% 60%;
@@ -60,13 +85,10 @@ h3 > a:hover {
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
-.card:hover {
-  transform: scale(1.1);
-  transition: all 0.8s;
-}
+
 @media screen and (max-width: 500px) {
   .card {
-    transform: scale(0.8);
+    transform: scale(0.95);
   }
 }
 /*Top section*/
@@ -75,6 +97,7 @@ h3 > a:hover {
   height: 15rem;
   background: url(/images/bg-pattern-card.svg);
 }
+
 .profile__pic {
   border-radius: 100%;
   border: 5px solid white;
@@ -92,10 +115,10 @@ h3 > a:hover {
 /*Profile section*/
 .profile {
   width: 35rem;
-  height: 23rem;
+  height: 22rem;
 
   text-align: center;
-  line-height: 1rem;
+  line-height: 0.5; /*line height is unitless*/
   background-color: #fff;
 }
 .flex__top {
@@ -127,18 +150,29 @@ hr {
 /*last grid*/
 .social {
   display: grid;
+  text-align: center;
+  column-gap: 1.5rem;
   grid-template-columns: repeat(
     auto-fit,
-    minmax(5rem, 1fr)
+    minmax(4rem, 1fr)
   ); /*reusable code if want to remove or add another thing*/
-  margin: 1.5rem 2rem 0 2rem;
+  margin: 3rem 5.5rem 0 2rem; /*top right bottom left*/
 }
-.like:hover {
-  transform: scale(1.1);
-  transition: all 0.5s;
-  cursor: pointer;
+.social > li {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
 }
-.like:hover h2,
+/*spans*/
+.number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  opacity: 0.8;
+}
 .tag {
-  color: var(--color-one);
+  font-size: 1.1rem;
+  color: var(--color-three);
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
 }
